@@ -9,18 +9,23 @@ for log in logs:
         total_failed_attempts += 1
         parts = log.split()
         ip_address = parts[5].replace("ip=", "")
+        username = parts[4].replace("user=", "")
+
 
         if ip_address in failed_attempts:
-            failed_attempts[ip_address] += 1
+            failed_attempts[ip_address]["attempts"] += 1
         else:
-            failed_attempts[ip_address] = 1
+            failed_attempts[ip_address] = {
+                "attempts": 1,
+                "username": username
+            }
 
 
 print("===== SECURITY LOG REPORT =====")
 print(f"Total Failed Login Attempts: {total_failed_attempts}")
 
 for ip_address, attempts in failed_attempts.items():
-    if attempts >= 3:
-        print(f"Suspicious IP: {ip_address} - {attempts} failed attempts")
+    if attempts["attempts"] >= 3:
+        print(f"Suspicious IP: {ip_address} - {attempts['attempts']} failed attempts - Targeted user: {attempts['username']}")
     else:
-        print(f"IP: {ip_address} - {attempts} failed attempt")
+        print(f"IP: {ip_address} - {attempts['attempts']} failed attempt - Targeted user: {attempts['username']}")
