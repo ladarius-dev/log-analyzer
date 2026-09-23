@@ -7,3 +7,4 @@
 2026-09-05 10:19:30 INFO Login successful user=admin ip=192.168.1.10
 2026-09-05 10:20:01 FAILED Login user=admin ip=192.168.1.50
 2026-09-05 10:20:15 FAILED Login user=admin ip=192.168.1.50
+2026-09-05 10:21:30 FAILED Login user=test ip=192.168.1.50

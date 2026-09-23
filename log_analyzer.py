@@ -14,10 +14,12 @@ for log in logs:
 
         if ip_address in failed_attempts:
             failed_attempts[ip_address]["attempts"] += 1
+            if username not in failed_attempts[ip_address]["usernames"]:
+                failed_attempts[ip_address]["usernames"].append(username)
         else:
             failed_attempts[ip_address] = {
                 "attempts": 1,
-                "username": username
+                "usernames": [username]
             }
 
 
@@ -26,6 +28,6 @@ print(f"Total Failed Login Attempts: {total_failed_attempts}")
 
 for ip_address, attempts in failed_attempts.items():
     if attempts["attempts"] >= 3:
-        print(f"Suspicious IP: {ip_address} - {attempts['attempts']} failed attempts - Targeted user: {attempts['username']}")
+        print(f"Suspicious IP: {ip_address} - {attempts['attempts']} failed attempts - Targeted users: {attempts['usernames']}")
     else:
-        print(f"IP: {ip_address} - {attempts['attempts']} failed attempt - Targeted user: {attempts['username']}")
+        print(f"IP: {ip_address} - {attempts['attempts']} failed attempt - Targeted users: {attempts['usernames']}")
