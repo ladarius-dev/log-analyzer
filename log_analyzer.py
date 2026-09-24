@@ -27,7 +27,11 @@ print("===== SECURITY LOG REPORT =====")
 print(f"Total Failed Login Attempts: {total_failed_attempts}")
 
 for ip_address, attempts in failed_attempts.items():
+    print(f"\nIP Address: {ip_address}")
+    print(f"Failed Attempts: {attempts['attempts']}")
+    print(f"Targeted Users: {', '.join(attempts['usernames'])}")
+
     if attempts["attempts"] >= 3:
-        print(f"Suspicious IP: {ip_address} - {attempts['attempts']} failed attempts - Targeted users: {attempts['usernames']}")
+        print("Status: SUSPICIOUS")
     else:
-        print(f"IP: {ip_address} - {attempts['attempts']} failed attempt - Targeted users: {attempts['usernames']}")
+        print("Status: NORMAL")
