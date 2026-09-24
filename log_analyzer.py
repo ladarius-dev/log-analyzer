@@ -1,3 +1,5 @@
+SUSPICIOUS_THRESHOLD = 3
+
 with open("sample.log", "r") as file:
     logs = file.readlines()
 
@@ -31,7 +33,7 @@ for ip_address, attempts in failed_attempts.items():
     print(f"Failed Attempts: {attempts['attempts']}")
     print(f"Targeted Users: {', '.join(attempts['usernames'])}")
 
-    if attempts["attempts"] >= 3:
+    if attempts["attempts"] >= SUSPICIOUS_THRESHOLD:
         print("Status: SUSPICIOUS")
     else:
         print("Status: NORMAL")
