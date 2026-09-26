@@ -33,7 +33,16 @@ for ip_address, attempts in failed_attempts.items():
     print(f"Failed Attempts: {attempts['attempts']}")
     print(f"Targeted Users: {', '.join(attempts['usernames'])}")
 
+    reasons = []
+
     if attempts["attempts"] >= SUSPICIOUS_THRESHOLD:
+        reasons.append("Failed login threshold exceeded")
+
+    if len(attempts["usernames"]) > 1:
+        reasons.append("Multiple accounts targeted")
+
+    if reasons:
         print("Status: SUSPICIOUS")
+        print(f"Reasons: {', '.join(reasons)}")
     else:
         print("Status: NORMAL")
